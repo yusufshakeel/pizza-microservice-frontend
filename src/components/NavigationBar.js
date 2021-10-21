@@ -46,7 +46,7 @@ function NavigationBar() {
             </MDBNavbarItem>
             <MDBNavbarItem>
               <MDBNavbarLink tag={Link} to="/login">
-                <MDBIcon icon="user" fas /> Log in
+                <MDBIcon icon="user" fas /> Login
               </MDBNavbarLink>
             </MDBNavbarItem>
           </MDBNavbarNav>

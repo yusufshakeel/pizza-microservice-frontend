@@ -1,9 +1,65 @@
-import { MDBContainer } from 'mdb-react-ui-kit';
+import {
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBCardText,
+  MDBCardTitle,
+  MDBCol,
+  MDBContainer,
+  MDBInput,
+  MDBRow,
+  MDBInputGroup,
+  MDBInputGroupText,
+  MDBInputGroupElement
+} from 'mdb-react-ui-kit';
+import { Link } from 'react-router-dom';
 
 function SignupPage() {
   return (
     <MDBContainer className="mt-5">
-      <h1>Sign up</h1>
+      <MDBRow className="justify-content-center">
+        <MDBCol sm={4} md={4}>
+          <MDBCard>
+            <MDBCardBody>
+              <MDBCardTitle className="text-center">Sign up</MDBCardTitle>
+              <MDBInputGroup size="lg">
+                <MDBInputGroupText>+91</MDBInputGroupText>
+                <MDBInputGroupElement type="text" placeholder="Phone" className="mb-3" />
+              </MDBInputGroup>
+              <MDBInput label="Email" id="user-email" type="email" size="lg" className="mb-3" />
+              <MDBInput
+                label="Password"
+                id="user-password"
+                type="password"
+                size="lg"
+                className="mb-3"
+              />
+              <MDBInput
+                label="First Name"
+                id="user-firstName"
+                type="text"
+                size="lg"
+                className="mb-3"
+              />
+              <MDBInput
+                label="Last Name"
+                id="user-lastName"
+                type="text"
+                size="lg"
+                className="mb-3"
+              />
+              <div className="d-grid gap-2 col-12 mx-auto mb-3">
+                <MDBBtn className="d-block" size="lg">
+                  Sign up
+                </MDBBtn>
+              </div>
+              <MDBCardText className="text-center">
+                Already have an account? <Link to="/login">Login</Link>
+              </MDBCardText>
+            </MDBCardBody>
+          </MDBCard>
+        </MDBCol>
+      </MDBRow>
     </MDBContainer>
   );
 }
