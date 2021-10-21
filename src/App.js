@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import NavigationBar from './components/NavigationBar';
 import LoginPage from './pages/LoginPage';
 import CartPage from './pages/CartPage';
@@ -7,7 +7,7 @@ import HomePage from './pages/HomePage';
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <NavigationBar />
       <Switch>
         <Route path="/cart">
@@ -19,11 +19,11 @@ function App() {
         <Route path="/signup">
           <SignupPage />
         </Route>
-        <Route path="/">
+        <Route path="/" exact>
           <HomePage />
         </Route>
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
 }
 
