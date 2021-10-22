@@ -14,6 +14,7 @@ import {
 import AppConstants from '../constants/app-constants';
 
 function NavigationBar() {
+  const [authToken] = useState(localStorage.getItem(AppConstants.APP_LOGGED_IN_USER));
   const [showBasic, setShowBasic] = useState(false);
 
   return (
@@ -45,9 +46,15 @@ function NavigationBar() {
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink tag={Link} to="/login">
-                <MDBIcon icon="user" fas /> Login
-              </MDBNavbarLink>
+              {authToken ? (
+                <MDBNavbarLink tag={Link} to="/user">
+                  <MDBIcon icon="user" fas /> User
+                </MDBNavbarLink>
+              ) : (
+                <MDBNavbarLink tag={Link} to="/login">
+                  <MDBIcon icon="user" fas /> Login
+                </MDBNavbarLink>
+              )}
             </MDBNavbarItem>
           </MDBNavbarNav>
         </MDBCollapse>

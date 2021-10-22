@@ -12,9 +12,18 @@ import {
   MDBInputGroupText,
   MDBInputGroupElement
 } from 'mdb-react-ui-kit';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import AppConstants from '../constants/app-constants';
 
 function SignupPage() {
+  const history = useHistory();
+  const [authToken] = useState(localStorage.getItem(AppConstants.APP_LOGGED_IN_USER));
+
+  useEffect(() => {
+    authToken && history.push('/');
+  }, [authToken, history]);
+
   return (
     <MDBContainer className="mt-5">
       <MDBRow className="justify-content-center">
