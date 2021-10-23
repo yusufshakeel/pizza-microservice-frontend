@@ -1,13 +1,14 @@
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import {
+  MDBBtn,
   MDBCard,
   MDBCardBody,
   MDBCardImage,
   MDBCardTitle,
   MDBCol,
   MDBIcon,
-  MDBRow,
-  MDBBtn
+  MDBRow
 } from 'mdb-react-ui-kit';
 
 import pizzaImg from '../assets/products/p-1.jpg';
@@ -17,6 +18,8 @@ import pepsi500MlImg from '../assets/products/p-8.jpg';
 import bottle7Up500MlImg from '../assets/products/p-9.jpg';
 import chocolateLavaCakeImg from '../assets/products/p-10.jpg';
 import redVelvetCakeImg from '../assets/products/p-11.jpg';
+
+import AppContext from '../contexts/app-context';
 
 const productsImage = {
   'p-1': pizzaImg,
@@ -33,6 +36,7 @@ const productsImage = {
 };
 
 function ProductCard(props) {
+  const { cartItems, setCartItems } = useContext(AppContext);
   const { productId, productName, productGroup, productDescription, price } = props.product;
   const getPrice = price => {
     return Number(price.centAmount / price.fraction).toFixed(2);
@@ -57,6 +61,14 @@ function ProductCard(props) {
     );
   };
 
+  const addItemToCartHandler = item => {
+    const product = JSON.parse(item.target.dataset.product);
+    const enrichedProduct = {
+      ...product
+    };
+    setCartItems([...cartItems, enrichedProduct]);
+  };
+
   return (
     <MDBCol sm={12} md={12}>
       <MDBCard className="mb-3">
@@ -68,7 +80,13 @@ function ProductCard(props) {
             <MDBCardBody className="px-0 py-2">
               <p>
                 {isVeg(productGroup)}{' '}
-                <MDBBtn className="float-end m-1 btn btn-outline-dark" outline size="lg">
+                <MDBBtn
+                  onClick={addItemToCartHandler}
+                  data-product={JSON.stringify(props.product)}
+                  className="float-end m-1 btn btn-outline-dark"
+                  outline
+                  size="lg"
+                >
                   Add
                 </MDBBtn>
               </p>

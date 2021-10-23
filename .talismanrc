@@ -1,3 +1,9 @@
 fileignoreconfig:
 - filename: package-lock.json
-  checksum: cf11a7460d23d1acd7bc02cf1e4995dab9a197139f15b1e193d802265e99d3ac
+  checksum: 07c9801360729ffc3ed634083570cbe040f0b1eb05dc0d83795b84dc6e41fc2f
+- filename: src/api-handlers/user-api-handler.js
+  checksum: 943938f5b220c8e32f1dd09b3cc2bfb49c6c70483d1c73487c30e598d6d11664
+- filename: src/pages/HomePage.js
+  checksum: ec873a29b1148f4527f72f90e94c3cf4fcf191e8dec1313632fcce9d14b0f594
+- filename: src/pages/LoginPage.js
+  checksum: 09869a20d1fd722d41f4920a259b1920cf8b76457feab599bdc67ddc856cd6ca
