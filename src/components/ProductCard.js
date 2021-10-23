@@ -63,12 +63,10 @@ function ProductCard(props) {
 
   const addItemToCartHandler = item => {
     const product = JSON.parse(item.target.dataset.product);
-    const matchingItemInCart = cartItems.find(item => item.productId === product.productId);
-    const quantityNumber = (matchingItemInCart?.quantity?.quantityNumber ?? 0) + 1;
     const enrichedProduct = {
       ...product,
       quantity: {
-        quantityNumber,
+        quantityNumber: 1,
         quantityUnit: 'unit'
       }
     };
