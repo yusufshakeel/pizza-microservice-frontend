@@ -19,6 +19,8 @@ import ApiHandlers from '../api-handlers';
 import ProductCard from '../components/ProductCard';
 import AppConstants from '../constants/app-constants';
 import AppContext from '../contexts/app-context';
+import CartProductCard from '../components/CartProductCard';
+import MoneyModel from '../models/money-model';
 const apiHandler = new ApiHandlers();
 
 function HomePage() {
@@ -32,7 +34,7 @@ function HomePage() {
 
   useEffect(() => {
     console.info(new Date(), 'HomePage', 'useEffect', 'entered');
-    console.info(new Date(), 'HomePage', 'useEffect', 'cartItems', { cartItems });
+    console.info(new Date(), 'HomePage', 'useEffect', 'cartItems', cartItems);
     !products.length &&
       (async () => {
         console.info(new Date(), 'HomePage', 'useEffect', 'fetch products...');
@@ -45,6 +47,14 @@ function HomePage() {
     setItemsInCart(cartItems);
     console.info(new Date(), 'HomePage', 'useEffect', 'exited');
   }, [products, cartItems]);
+
+  const totalAmount = () => {
+    return itemsInCart.reduce((sum, item) => {
+      const { price, quantity } = item;
+      const amount = MoneyModel(price).multiply(quantity.quantityNumber).asNumeric();
+      return sum + amount;
+    }, 0);
+  };
 
   return (
     <MDBContainer className="mt-5">
@@ -62,14 +72,19 @@ function HomePage() {
             <MDBCardHeader>
               <MDBCardTitle>Cart</MDBCardTitle>
             </MDBCardHeader>
-            <MDBCardBody>
-              {!itemsInCart.length && (
+            <MDBCardBody style={{ maxHeight: '300px', overflow: 'scroll' }}>
+              {itemsInCart.length ? (
+                itemsInCart.map((item, index) => <CartProductCard key={index} product={item} />)
+              ) : (
                 <div className="text-center">
                   <MDBIcon icon="shopping-cart" fas style={{ fontSize: '2em' }} />
                 </div>
               )}
             </MDBCardBody>
             <MDBCardFooter>
+              <div className="py-3">
+                <p className="text-end">Total &#x20B9; {totalAmount()}</p>
+              </div>
               <div className="d-grid gap-2 col-12 mx-auto">
                 {!isLoggedIn ? (
                   <MDBBtn

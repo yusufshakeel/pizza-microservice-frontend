@@ -4,6 +4,6 @@ fileignoreconfig:
 - filename: src/api-handlers/user-api-handler.js
   checksum: 943938f5b220c8e32f1dd09b3cc2bfb49c6c70483d1c73487c30e598d6d11664
 - filename: src/pages/HomePage.js
-  checksum: ec873a29b1148f4527f72f90e94c3cf4fcf191e8dec1313632fcce9d14b0f594
+  checksum: 08fd06db3c2d39d370091b17eebe1d7837e6f921f85a0b72195bd390f1addb60
 - filename: src/pages/LoginPage.js
   checksum: 09869a20d1fd722d41f4920a259b1920cf8b76457feab599bdc67ddc856cd6ca

@@ -1,8 +1,5 @@
-import { useContext } from 'react';
 import PropTypes from 'prop-types';
-
 import {
-  MDBBtn,
   MDBCard,
   MDBCardBody,
   MDBCardImage,
@@ -19,10 +16,7 @@ import pepsi500MlImg from '../assets/products/p-8.jpg';
 import bottle7Up500MlImg from '../assets/products/p-9.jpg';
 import chocolateLavaCakeImg from '../assets/products/p-10.jpg';
 import redVelvetCakeImg from '../assets/products/p-11.jpg';
-
 import MoneyModel from '../models/money-model';
-
-import AppContext from '../contexts/app-context';
 
 const productsImage = {
   'p-1': pizzaImg,
@@ -39,8 +33,7 @@ const productsImage = {
 };
 
 function ProductCard(props) {
-  const { cartItems, setCartItems } = useContext(AppContext);
-  const { productId, productName, productGroup, productDescription, price } = props.product;
+  const { productId, productName, productGroup, price, quantity } = props.product;
 
   const isVeg = group => {
     const match = [
@@ -61,18 +54,20 @@ function ProductCard(props) {
     );
   };
 
-  const addItemToCartHandler = item => {
-    const product = JSON.parse(item.target.dataset.product);
-    const matchingItemInCart = cartItems.find(item => item.productId === product.productId);
-    const quantityNumber = (matchingItemInCart?.quantity?.quantityNumber ?? 0) + 1;
-    const enrichedProduct = {
-      ...product,
-      quantity: {
-        quantityNumber,
-        quantityUnit: 'unit'
-      }
-    };
-    setCartItems([...cartItems, enrichedProduct]);
+  const loadQuantityBtn = () => {
+    return (
+      <span className="float-end m-2">
+        <span className="btn" style={{ border: '1px solid #eee', padding: '5px 10px' }}>
+          -
+        </span>
+        <span style={{ backgroundColor: '#eee', padding: '5px 10px' }}>
+          {quantity.quantityNumber}
+        </span>
+        <span className="btn" style={{ border: '1px solid #eee', padding: '5px 10px' }}>
+          +
+        </span>
+      </span>
+    );
   };
 
   return (
@@ -84,21 +79,12 @@ function ProductCard(props) {
           </MDBCol>
           <MDBCol md="8">
             <MDBCardBody className="px-0 py-2">
-              <p>
-                {isVeg(productGroup)}{' '}
-                <MDBBtn
-                  onClick={addItemToCartHandler}
-                  data-product={JSON.stringify(props.product)}
-                  className="float-end m-1 btn btn-outline-dark"
-                  outline
-                  size="lg"
-                >
-                  Add
-                </MDBBtn>
-              </p>
+              <div>
+                {isVeg(productGroup)}
+                {loadQuantityBtn()}
+              </div>
               <MDBCardTitle>{productName}</MDBCardTitle>
               <p className="text-right">&#x20B9; {MoneyModel(price).asNumeric()}</p>
-              <p>{productDescription}</p>
             </MDBCardBody>
           </MDBCol>
         </MDBRow>
@@ -111,12 +97,15 @@ ProductCard.propTypes = {
   product: PropTypes.shape({
     productId: PropTypes.string,
     productName: PropTypes.string,
-    productDescription: PropTypes.string,
     productGroup: PropTypes.string,
     price: PropTypes.shape({
       centAmount: PropTypes.number,
       fraction: PropTypes.number,
       currency: PropTypes.string
+    }),
+    quantity: PropTypes.shape({
+      quantityNumber: PropTypes.number,
+      quantityUnit: PropTypes.string
     })
   })
 };
