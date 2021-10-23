@@ -7,3 +7,7 @@ fileignoreconfig:
   checksum: 08fd06db3c2d39d370091b17eebe1d7837e6f921f85a0b72195bd390f1addb60
 - filename: src/pages/LoginPage.js
   checksum: 09869a20d1fd722d41f4920a259b1920cf8b76457feab599bdc67ddc856cd6ca
+- filename: package-lock.json
+  checksum: 1478bfafc7a3b9d01adec83e98fe03d1aa226a10e22716c906e9b2648de191c6
+- filename: src/pages/HomePage.js
+  checksum: cbe24db1e7dc39bd22815b65c9eafe0f7521fac3c2b1baab94fb147b2a312562

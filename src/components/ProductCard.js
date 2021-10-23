@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuidV4 } from 'uuid';
 
 import {
   MDBBtn,
@@ -68,7 +69,8 @@ function ProductCard(props) {
       quantity: {
         quantityNumber: 1,
         quantityUnit: 'unit'
-      }
+      },
+      _cardId: uuidV4()
     };
     setCartItems([...cartItems, enrichedProduct]);
   };

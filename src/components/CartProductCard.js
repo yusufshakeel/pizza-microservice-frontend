@@ -1,5 +1,7 @@
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import {
+  MDBBtn,
   MDBCard,
   MDBCardBody,
   MDBCardImage,
@@ -17,6 +19,7 @@ import bottle7Up500MlImg from '../assets/products/p-9.jpg';
 import chocolateLavaCakeImg from '../assets/products/p-10.jpg';
 import redVelvetCakeImg from '../assets/products/p-11.jpg';
 import MoneyModel from '../models/money-model';
+import AppContext from '../contexts/app-context';
 
 const productsImage = {
   'p-1': pizzaImg,
@@ -33,7 +36,8 @@ const productsImage = {
 };
 
 function ProductCard(props) {
-  const { productId, productName, productGroup, price, quantity } = props.product;
+  const { cartItems, setCartItems } = useContext(AppContext);
+  const { productId, productName, productGroup, price } = props.product;
 
   const isVeg = group => {
     const match = [
@@ -54,20 +58,26 @@ function ProductCard(props) {
     );
   };
 
-  const loadQuantityBtn = () => {
-    return (
-      <span className="float-end m-2">
-        <span className="btn" style={{ border: '1px solid #eee', padding: '5px 10px' }}>
-          -
-        </span>
-        <span style={{ backgroundColor: '#eee', padding: '5px 10px' }}>
-          {quantity.quantityNumber}
-        </span>
-        <span className="btn" style={{ border: '1px solid #eee', padding: '5px 10px' }}>
-          +
-        </span>
-      </span>
-    );
+  // const loadQuantityBtn = () => {
+  //   return (
+  //     <span className="float-end m-2">
+  //       <span className="btn" style={{ border: '1px solid #eee', padding: '5px 10px' }}>
+  //         -
+  //       </span>
+  //       <span style={{ backgroundColor: '#eee', padding: '5px 10px' }}>
+  //         {quantity.quantityNumber}
+  //       </span>
+  //       <span className="btn" style={{ border: '1px solid #eee', padding: '5px 10px' }}>
+  //         +
+  //       </span>
+  //     </span>
+  //   );
+  // };
+
+  const removeItemFromCartHandler = item => {
+    const product = JSON.parse(item.target.dataset.product);
+    const updatedCartItems = cartItems.filter(({ _cardId }) => _cardId !== product._cardId);
+    setCartItems(updatedCartItems);
   };
 
   return (
@@ -81,7 +91,16 @@ function ProductCard(props) {
             <MDBCardBody className="px-0 py-2">
               <div>
                 {isVeg(productGroup)}
-                {loadQuantityBtn()}
+                <MDBBtn
+                  onClick={removeItemFromCartHandler}
+                  data-product={JSON.stringify(props.product)}
+                  data-card-id={props.cardId}
+                  className="float-end m-1 px-2 py-1 btn btn-outline-dark"
+                  outline
+                  size="sm"
+                >
+                  x
+                </MDBBtn>
               </div>
               <MDBCardTitle>{productName}</MDBCardTitle>
               <p className="text-right">&#x20B9; {MoneyModel(price).asNumeric()}</p>
@@ -94,6 +113,7 @@ function ProductCard(props) {
 }
 
 ProductCard.propTypes = {
+  cardId: PropTypes.string,
   product: PropTypes.shape({
     productId: PropTypes.string,
     productName: PropTypes.string,

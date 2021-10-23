@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -29,30 +29,30 @@ function HomePage() {
 
   console.info(new Date(), 'HomePage', 'entered');
 
-  const [itemsInCart, setItemsInCart] = useState(cartItems);
+  const [itemsInCart, setItemsInCart] = useState([]);
   const [products, setProducts] = useState([]);
   const [isLoggedIn] = useState(localStorage.getItem(AppConstants.APP_LOGGED_IN_USER) ?? false);
 
-  const getItemsInCart = useCallback(() => {
-    return cartItems.reduce((result, cartItem) => {
-      const matchingCartItem = result.find(item => item.productId === cartItem.productId);
-      if (matchingCartItem) {
-        const enrichedResult = result.filter(item => item.productId !== matchingCartItem.productId);
-        return [
-          ...enrichedResult,
-          {
-            ...matchingCartItem,
-            quantity: {
-              quantityNumber: matchingCartItem.quantity.quantityNumber + 1,
-              quantityUnit: 'unit'
-            }
-          }
-        ];
-      } else {
-        return [...result, cartItem];
-      }
-    }, []);
-  }, [cartItems]);
+  // const getItemsInCart = useCallback(() => {
+  //   return cartItems.reduce((result, cartItem) => {
+  //     const matchingCartItem = result.find(item => item.productId === cartItem.productId);
+  //     if (matchingCartItem) {
+  //       const enrichedResult = result.filter(item => item.productId !== matchingCartItem.productId);
+  //       return [
+  //         ...enrichedResult,
+  //         {
+  //           ...matchingCartItem,
+  //           quantity: {
+  //             quantityNumber: matchingCartItem.quantity.quantityNumber + 1,
+  //             quantityUnit: 'unit'
+  //           }
+  //         }
+  //       ];
+  //     } else {
+  //       return [...result, cartItem];
+  //     }
+  //   }, []);
+  // }, [cartItems]);
 
   useEffect(() => {
     console.info(new Date(), 'HomePage', 'useEffect', 'entered');
@@ -67,11 +67,11 @@ function HomePage() {
         }
       })();
 
-    const items = getItemsInCart();
-    setItemsInCart(items);
+    // const items = getItemsInCart();
+    setItemsInCart(cartItems);
 
     console.info(new Date(), 'HomePage', 'useEffect', 'exited');
-  }, [products, cartItems, getItemsInCart]);
+  }, [products, cartItems]);
 
   const totalAmount = () => {
     return itemsInCart.reduce((sum, item) => {
@@ -99,7 +99,9 @@ function HomePage() {
             </MDBCardHeader>
             <MDBCardBody style={{ maxHeight: '300px', overflow: 'scroll' }}>
               {itemsInCart.length ? (
-                itemsInCart.map((item, index) => <CartProductCard key={index} product={item} />)
+                itemsInCart.map((item, index) => {
+                  return <CartProductCard cardId={item._cardId} key={index} product={item} />;
+                })
               ) : (
                 <div className="text-center">
                   <MDBIcon icon="shopping-cart" fas style={{ fontSize: '2em' }} />
