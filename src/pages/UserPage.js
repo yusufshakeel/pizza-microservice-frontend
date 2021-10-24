@@ -13,12 +13,14 @@ import AppConstants from '../constants/app-constants';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+import JsonParser from '../functionals/json-parser';
+
 function UserPage() {
   const history = useHistory();
-  const [authToken] = useState(localStorage.getItem(AppConstants.APP_LOGGED_IN_USER));
+  const [authToken] = useState(JsonParser(localStorage.getItem(AppConstants.APP_LOGGED_IN_USER)));
 
   useEffect(() => {
-    !authToken && history.push('/');
+    !authToken?.data?.token && history.push('/');
   }, [authToken, history]);
 
   const logoutHandler = () => {

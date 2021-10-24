@@ -15,3 +15,5 @@ fileignoreconfig:
   checksum: 8c425e9a0dd77fef25655bc725459f6274b2a4a5a7550fb8e521de890b80523b
 - filename: src/pages/SignupPage.js
   checksum: b3ff83b2ea5dd7c8ac000c89eb3cf5cfab205e37b46d995efe5713a68790c334
+- filename: package-lock.json
+  checksum: 4b00d106c503ca62089debd4a48db7b75165066fd01393c9266013743b83747e
