@@ -20,7 +20,7 @@ import ProductCard from '../components/ProductCard';
 import AppConstants from '../constants/app-constants';
 import AppContext from '../contexts/app-context';
 import CartProductCard from '../components/CartProductCard';
-import MoneyModel from '../models/money-model';
+import TotalAmount from '../functionals/total-amount';
 
 const apiHandler = new ApiHandlers();
 
@@ -73,14 +73,6 @@ function HomePage() {
     console.info(new Date(), 'HomePage', 'useEffect', 'exited');
   }, [products, cartItems]);
 
-  const totalAmount = () => {
-    return itemsInCart.reduce((sum, item) => {
-      const { price, quantity } = item;
-      const amount = MoneyModel(price).multiply(quantity.quantityNumber).asNumeric();
-      return sum + amount;
-    }, 0);
-  };
-
   return (
     <MDBContainer className="mt-5">
       <MDBRow>
@@ -110,7 +102,7 @@ function HomePage() {
             </MDBCardBody>
             <MDBCardFooter>
               <div className="py-3">
-                <p>Total &#x20B9; {totalAmount()}</p>
+                <p>Total &#x20B9; {TotalAmount(itemsInCart)}</p>
               </div>
               <div className="d-grid gap-2 col-12 mx-auto">
                 {!isLoggedIn ? (

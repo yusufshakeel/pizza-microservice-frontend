@@ -44,16 +44,19 @@ function LoginPage() {
 
   const loginHandler = async event => {
     event.preventDefault();
+
+    setLoginErrorMessage('');
+
     if (!isLoginInputValid()) {
       return;
     }
 
-    try {
-      const result = await apiHandler.userApiHandler.login({ email, password });
+    const result = await apiHandler.userApiHandler.login({ email, password });
+    if (result?.data?.token) {
       localStorage.setItem(AppConstants.APP_LOGGED_IN_USER, JSON.stringify(result));
       window.location.reload();
-    } catch (e) {
-      setLoginErrorMessage(e.message);
+    } else {
+      setLoginErrorMessage(result?.errors?.[0]?.message);
       return false;
     }
   };
@@ -73,6 +76,7 @@ function LoginPage() {
                   size="lg"
                   className="mb-3"
                   value={email}
+                  required
                   onChange={e => setEmail(e.target.value)}
                 />
                 <MDBInput
@@ -84,6 +88,7 @@ function LoginPage() {
                   name="password"
                   autoComplete="on"
                   value={password}
+                  required
                   onChange={e => setPassword(e.target.value)}
                 />
                 <div className="d-grid gap-2 col-12 mx-auto mb-3">

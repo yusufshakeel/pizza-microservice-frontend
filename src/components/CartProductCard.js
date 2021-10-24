@@ -99,7 +99,7 @@ function ProductCard(props) {
                   outline
                   size="sm"
                 >
-                  x
+                  <MDBIcon fas icon="times" />
                 </MDBBtn>
               </div>
               <MDBCardTitle>{productName}</MDBCardTitle>

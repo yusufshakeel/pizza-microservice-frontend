@@ -11,3 +11,7 @@ fileignoreconfig:
   checksum: 1478bfafc7a3b9d01adec83e98fe03d1aa226a10e22716c906e9b2648de191c6
 - filename: src/pages/HomePage.js
   checksum: cbe24db1e7dc39bd22815b65c9eafe0f7521fac3c2b1baab94fb147b2a312562
+- filename: src/pages/CartPage.js
+  checksum: 8c425e9a0dd77fef25655bc725459f6274b2a4a5a7550fb8e521de890b80523b
+- filename: src/pages/SignupPage.js
+  checksum: b3ff83b2ea5dd7c8ac000c89eb3cf5cfab205e37b46d995efe5713a68790c334

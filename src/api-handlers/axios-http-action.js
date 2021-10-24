@@ -22,7 +22,7 @@ export default function AxiosHttpAction(axiosInstance) {
       return response.data;
     } catch (e) {
       console.error(e);
-      throw e;
+      return e?.response?.data ?? 'Unknown error';
     }
   };
 
@@ -41,7 +41,7 @@ export default function AxiosHttpAction(axiosInstance) {
       return response.data;
     } catch (e) {
       console.error(e);
-      throw e;
+      return e?.response?.data ?? 'Unknown error';
     }
   };
 
