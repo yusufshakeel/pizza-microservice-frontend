@@ -75,8 +75,8 @@ function ProductCard(props) {
   // };
 
   const removeItemFromCartHandler = item => {
-    const product = JSON.parse(item.target.dataset.product);
-    const updatedCartItems = cartItems.filter(({ _cardId }) => _cardId !== product._cardId);
+    const { cardId } = item.target.dataset;
+    const updatedCartItems = cartItems.filter(({ _cardId }) => _cardId !== cardId);
     setCartItems(updatedCartItems);
   };
 
@@ -93,7 +93,6 @@ function ProductCard(props) {
                 {isVeg(productGroup)}
                 <MDBBtn
                   onClick={removeItemFromCartHandler}
-                  data-product={JSON.stringify(props.product)}
                   data-card-id={props.cardId}
                   className="float-end m-1 px-2 py-1 btn btn-outline-dark"
                   outline
