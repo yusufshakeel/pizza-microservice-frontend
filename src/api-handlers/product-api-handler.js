@@ -4,7 +4,6 @@ function ProductApiHandler({ axiosInstance }) {
   const httpAction = AxiosHttpAction(axiosInstance);
   this.fetchAllProducts = async function fetchAllProducts() {
     return await httpAction.get({
-      method: 'get',
       url: `/product/v1/products`
     });
   };

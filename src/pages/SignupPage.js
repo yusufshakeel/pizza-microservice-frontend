@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 import {
   MDBBtn,
@@ -85,8 +86,17 @@ function SignupPage() {
 
     const createdUser = await apiHandler.userApiHandler.signUp(userDataforSignUp);
     if (createdUser?.data?.userId) {
+      toast.success('Account created!', {
+        position: 'top-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined
+      });
       setTimeout(() => {
-        window.location.reload();
+        history.push('/');
       }, 5000);
     } else {
       setErrorMessage(createdUser?.errors?.[0]?.message);
@@ -98,6 +108,7 @@ function SignupPage() {
     <MDBContainer className="mt-5">
       <MDBRow className="justify-content-center">
         <MDBCol sm={4} md={4}>
+          <ToastContainer />
           <MDBCard>
             <MDBCardBody>
               <MDBCardTitle className="text-center">Sign up</MDBCardTitle>

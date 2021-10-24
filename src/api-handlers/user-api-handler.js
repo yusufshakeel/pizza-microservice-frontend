@@ -2,6 +2,7 @@ import AxiosHttpAction from './axios-http-action';
 
 function UserApiHandler({ axiosInstance }) {
   const httpAction = AxiosHttpAction(axiosInstance);
+
   this.login = async function login({ email, password }) {
     return await httpAction.post({
       method: 'post',
@@ -53,10 +54,9 @@ function UserApiHandler({ axiosInstance }) {
   };
 
   this.fetchUserDetail = async function fetchUserDetail({ token }) {
-    return await httpAction.post({
-      method: 'get',
+    return await httpAction.get({
       headers: { Authorization: `Bearer ${token}` },
-      url: `/user/v1/users`
+      url: `/user/v1/users/account`
     });
   };
 }

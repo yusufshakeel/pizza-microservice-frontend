@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage';
 import CartPage from './pages/CartPage';
 import SignupPage from './pages/SignupPage';
 import HomePage from './pages/HomePage';
+import Footer from './components/Footer';
 
 import UserPage from './pages/UserPage';
 import AppContext from './contexts/app-context';
@@ -33,6 +34,7 @@ function App() {
             <HomePage />
           </Route>
         </Switch>
+        <Footer />
       </BrowserRouter>
     </AppContext.Provider>
   );
