@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import {
   MDBCard,
   MDBCardBody,
@@ -60,7 +61,12 @@ function CartPage() {
                   </tr>
                 </MDBTableBody>
               </MDBTable>
-              {total() < 300 && <p>Still need &#x20B9; {300 - total()} to place an order.</p>}
+              {total() < 300 && (
+                <p>
+                  Still need &#x20B9; {300 - total()} to place an order.{' '}
+                  <Link to="/">Continue shopping.</Link>
+                </p>
+              )}
             </MDBCardBody>
             <MDBCardFooter>
               <div className="d-grid gap-2 col-12 mx-auto">
