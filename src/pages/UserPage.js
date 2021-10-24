@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import {
   MDBCard,
@@ -30,16 +31,25 @@ function UserPage() {
       history.push('/');
     } else {
       (async () => {
-        console.info(new Date(), 'UserPage', 'useEffect', 'fetch user...');
         const fetchedProducts = await apiHandler.userApiHandler.fetchUserDetail({
           token: authToken.data.token
         });
-        console.info(new Date(), 'UserPage', 'useEffect', 'fetch user...', fetchedProducts);
         if (fetchedProducts?.data?.userId) {
-          console.info(new Date(), 'UserPage', 'useEffect', 'user found!', fetchedProducts);
           setUserDetail(fetchedProducts.data);
-        } else {
-          console.info(new Date(), 'UserPage', 'useEffect', 'auth failed!', fetchedProducts);
+        } else if (fetchedProducts?.errors?.[0]?.code === 'USER_DOMAIN_AUTH_TOKEN_ERROR') {
+          toast.error('Session expired!', {
+            position: 'top-center',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined
+          });
+          localStorage.removeItem(AppConstants.APP_LOGGED_IN_USER);
+          setTimeout(() => {
+            window.location.reload();
+          }, 5000);
         }
       })();
     }

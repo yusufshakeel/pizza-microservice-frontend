@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import {
   MDBBtn,
@@ -108,7 +108,6 @@ function SignupPage() {
     <MDBContainer className="mt-5">
       <MDBRow className="justify-content-center">
         <MDBCol sm={4} md={4}>
-          <ToastContainer />
           <MDBCard>
             <MDBCardBody>
               <MDBCardTitle className="text-center">Sign up</MDBCardTitle>

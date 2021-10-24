@@ -9,12 +9,14 @@ import Footer from './components/Footer';
 
 import UserPage from './pages/UserPage';
 import AppContext from './contexts/app-context';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
 
   return (
     <AppContext.Provider value={{ cartItems, setCartItems }}>
+      <ToastContainer />
       <BrowserRouter>
         <NavigationBar />
         <Switch>
