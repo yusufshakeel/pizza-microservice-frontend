@@ -102,7 +102,10 @@ function HomePage() {
             </MDBCardBody>
             <MDBCardFooter>
               <div className="py-3">
-                <p>Total &#x20B9; {TotalAmount(itemsInCart)}</p>
+                <h5>Subtotal &#x20B9; {TotalAmount(itemsInCart)}</h5>
+                <p>
+                  <small>Price may change</small>
+                </p>
               </div>
               <div className="d-grid gap-2 col-12 mx-auto">
                 {!isLoggedIn ? (
