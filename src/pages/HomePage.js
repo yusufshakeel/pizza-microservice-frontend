@@ -31,7 +31,7 @@ function HomePage() {
 
   const [itemsInCart, setItemsInCart] = useState([]);
   const [products, setProducts] = useState([]);
-  const [isLoggedIn] = useState(localStorage.getItem(AppConstants.APP_LOGGED_IN_USER) ?? false);
+  const isLoggedIn = localStorage.getItem(AppConstants.APP_LOGGED_IN_USER) || false;
 
   // const getItemsInCart = useCallback(() => {
   //   return cartItems.reduce((result, cartItem) => {
@@ -104,7 +104,7 @@ function HomePage() {
               <div className="py-3">
                 <h5>Subtotal &#x20B9; {TotalAmount(itemsInCart)}</h5>
                 <p>
-                  <small>Price may change</small>
+                  <small>Price may change.</small>
                 </p>
               </div>
               <div className="d-grid gap-2 col-12 mx-auto">

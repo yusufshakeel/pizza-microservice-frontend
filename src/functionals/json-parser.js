@@ -1,8 +1,8 @@
-function JsonParser(token) {
+function JsonParser(data) {
   try {
-    return JSON.parse(token);
+    return JSON.parse(data);
   } catch (e) {
-    return {};
+    return data;
   }
 }
 
