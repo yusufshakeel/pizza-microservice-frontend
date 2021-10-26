@@ -19,10 +19,10 @@ import MoneyModel from '../models/money-model';
 import TotalAmount from '../functionals/total-amount';
 
 function CartPage() {
-  const { cartItems } = useContext(AppContext);
+  const { cart } = useContext(AppContext);
 
   const total = () => {
-    return cartItems?.length && TotalAmount(cartItems);
+    return cart.items?.length && TotalAmount(cart.items);
   };
 
   return (
@@ -47,7 +47,7 @@ function CartPage() {
                   </tr>
                 </MDBTableHead>
                 <MDBTableBody>
-                  {cartItems.map(item => {
+                  {cart.items.map(item => {
                     return (
                       <tr key={item._cardId}>
                         <td>{item.productName}</td>
@@ -71,7 +71,7 @@ function CartPage() {
             <MDBCardFooter>
               <div className="d-grid gap-2 col-12 mx-auto">
                 <MDBBtn
-                  disabled={!cartItems.length || total() < 300}
+                  disabled={!cart.items.length || total() < 300}
                   className="btn btn-success"
                   size="lg"
                 >

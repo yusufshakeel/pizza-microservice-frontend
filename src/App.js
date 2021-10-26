@@ -12,10 +12,10 @@ import AppContext from './contexts/app-context';
 import { ToastContainer } from 'react-toastify';
 
 function App() {
-  const [cartItems, setCartItems] = useState([]);
+  const [cart, setCart] = useState({ updatedAt: new Date().getTime(), items: [] });
 
   return (
-    <AppContext.Provider value={{ cartItems, setCartItems }}>
+    <AppContext.Provider value={{ cart, setCart }}>
       <ToastContainer />
       <BrowserRouter>
         <NavigationBar />

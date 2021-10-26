@@ -1,8 +1,11 @@
 import { createContext } from 'react';
 
 const AppContext = createContext({
-  cartItems: [],
-  setCartItems: () => {}
+  cart: {
+    updatedAt: new Date().getTime(),
+    items: []
+  },
+  setCart: () => {}
 });
 
 export default AppContext;

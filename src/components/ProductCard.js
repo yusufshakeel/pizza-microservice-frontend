@@ -40,7 +40,7 @@ const productsImage = {
 };
 
 function ProductCard(props) {
-  const { cartItems, setCartItems } = useContext(AppContext);
+  const { cart, setCart } = useContext(AppContext);
   const { productId, productName, productGroup, productDescription, price } = props.product;
 
   const isVeg = group => {
@@ -72,7 +72,7 @@ function ProductCard(props) {
       },
       _cardId: uuidV4()
     };
-    setCartItems([...cartItems, enrichedProduct]);
+    setCart({ updatedAt: new Date().getTime(), items: [...cart.items, enrichedProduct] });
   };
 
   return (
