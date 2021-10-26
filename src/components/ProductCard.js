@@ -24,6 +24,7 @@ import redVelvetCakeImg from '../assets/products/p-11.jpg';
 import MoneyModel from '../models/money-model';
 
 import AppContext from '../contexts/app-context';
+import AppConstants from '../constants/app-constants';
 
 const productsImage = {
   'p-1': pizzaImg,
@@ -72,7 +73,12 @@ function ProductCard(props) {
       },
       _cardId: uuidV4()
     };
-    setCart({ updatedAt: new Date().getTime(), items: [...cart.items, enrichedProduct] });
+    const updatedCart = {
+      updatedAt: new Date().getTime(),
+      items: [...cart.items, enrichedProduct]
+    };
+    setCart(updatedCart);
+    localStorage.setItem(AppConstants.APP_USER_CART, JSON.stringify(updatedCart));
   };
 
   return (
