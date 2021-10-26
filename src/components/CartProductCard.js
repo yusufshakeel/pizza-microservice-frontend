@@ -36,7 +36,7 @@ const productsImage = {
 };
 
 function ProductCard(props) {
-  const { cartItems, setCartItems } = useContext(AppContext);
+  const { cart, setCart } = useContext(AppContext);
   const { productId, productName, productGroup, price } = props.product;
 
   const isVeg = group => {
@@ -44,6 +44,7 @@ function ProductCard(props) {
       { type: 'VEG', color: '#008000' },
       { type: 'NON VEG', color: '#ad4720' }
     ].find(record => record.type === group);
+
     return (
       <span
         style={{
@@ -58,26 +59,10 @@ function ProductCard(props) {
     );
   };
 
-  // const loadQuantityBtn = () => {
-  //   return (
-  //     <span className="float-end m-2">
-  //       <span className="btn" style={{ border: '1px solid #eee', padding: '5px 10px' }}>
-  //         -
-  //       </span>
-  //       <span style={{ backgroundColor: '#eee', padding: '5px 10px' }}>
-  //         {quantity.quantityNumber}
-  //       </span>
-  //       <span className="btn" style={{ border: '1px solid #eee', padding: '5px 10px' }}>
-  //         +
-  //       </span>
-  //     </span>
-  //   );
-  // };
-
   const removeItemFromCartHandler = item => {
     const { cardId } = item.target.dataset;
-    const updatedCartItems = cartItems.filter(({ _cardId }) => _cardId !== cardId);
-    setCartItems(updatedCartItems);
+    const updatedCartItems = cart.items.filter(({ _cardId }) => _cardId !== cardId);
+    setCart({ updatedAt: new Date().getTime(), items: updatedCartItems });
   };
 
   return (

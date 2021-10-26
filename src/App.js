@@ -10,9 +10,15 @@ import Footer from './components/Footer';
 import UserPage from './pages/UserPage';
 import AppContext from './contexts/app-context';
 import { ToastContainer } from 'react-toastify';
+import JsonParser from './functionals/json-parser';
+import AppConstants from './constants/app-constants';
 
 function App() {
-  const [cart, setCart] = useState({ updatedAt: new Date().getTime(), items: [] });
+  const itemsInCartCache = JsonParser(localStorage.getItem(AppConstants.APP_USER_CART)) || {
+    updatedAt: new Date().getTime(),
+    items: []
+  };
+  const [cart, setCart] = useState(itemsInCartCache);
 
   return (
     <AppContext.Provider value={{ cart, setCart }}>
