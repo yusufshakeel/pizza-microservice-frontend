@@ -40,11 +40,13 @@ function NavigationBar() {
                 <MDBIcon icon="home" fas /> Home
               </MDBNavbarLink>
             </MDBNavbarItem>
-            <MDBNavbarItem>
-              <MDBNavbarLink tag={Link} to="/cart">
-                <MDBIcon icon="shopping-cart" fas /> Cart
-              </MDBNavbarLink>
-            </MDBNavbarItem>
+            {authToken && (
+              <MDBNavbarItem>
+                <MDBNavbarLink tag={Link} to="/cart">
+                  <MDBIcon icon="shopping-cart" fas /> Cart
+                </MDBNavbarLink>
+              </MDBNavbarItem>
+            )}
             <MDBNavbarItem>
               {authToken ? (
                 <MDBNavbarLink tag={Link} to="/user">

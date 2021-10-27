@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
+
 import {
   MDBBtn,
   MDBCard,
@@ -18,6 +19,7 @@ import pepsi500MlImg from '../assets/products/p-8.jpg';
 import bottle7Up500MlImg from '../assets/products/p-9.jpg';
 import chocolateLavaCakeImg from '../assets/products/p-10.jpg';
 import redVelvetCakeImg from '../assets/products/p-11.jpg';
+
 import MoneyModel from '../models/money-model';
 import AppContext from '../contexts/app-context';
 import AppConstants from '../constants/app-constants';
