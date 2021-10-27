@@ -30,7 +30,8 @@
     "test": "react-scripts test --coverage",
     "eject": "react-scripts eject",
     "lint": "npx eslint -c .eslintrc.json src",
-    "lint:fix": "npx eslint --fix -c .eslintrc.json src"
+    "lint:fix": "npx eslint --fix -c .eslintrc.json src",
+    "docker-build": "docker build -t yusufshakeel/pizza-microservice-backend-client-service ."
   },
   "eslintConfig": {
     "extends": [

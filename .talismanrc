@@ -25,3 +25,5 @@ fileignoreconfig:
   checksum: a9dcad3b6388c67978d9a6fa3938f21bd6b4b4dbdd50ad30944d553e05a63ab1
 - filename: src/pages/PaymentPage.js
   checksum: b7e0196c496a30a4c7feb964ad8a22fa649fdf4b018958b2cc407d373b4548ec
+- filename: src/constants/app-constants.js
+  checksum: 82d18eb0c20b9cc63cf2142cc43f1932d7112e2048f39f9401b943cc2a9cb643
