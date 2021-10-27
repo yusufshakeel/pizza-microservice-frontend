@@ -1,0 +1,157 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "eslint:recommended",
+    "plugin:node/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "plugin:testing-library/recommended",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended"
+  ],
+  "plugins": [
+    "prettier",
+    "jest-dom",
+    "testing-library"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "strict": [
+      "error",
+      "global"
+    ],
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "time",
+          "timeEnd",
+          "error",
+          "info"
+        ]
+      }
+    ],
+    "new-cap": [
+      "off"
+    ],
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": false,
+        "variables": false
+      }
+    ],
+    "no-unused-vars": [
+      "error"
+    ],
+    "no-var": [
+      "error"
+    ],
+    "indent": [
+      "error",
+      2
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single",
+      {
+        "allowTemplateLiterals": true,
+        "avoidEscape": true
+      }
+    ],
+    "no-tabs": [
+      "off",
+      "always"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 100,
+        "ignoreComments": true,
+        "ignoreTrailingComments": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
+      }
+    ],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "never",
+        "objects": "never",
+        "imports": "never",
+        "exports": "never",
+        "functions": "never"
+      }
+    ],
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "always",
+        "named": "never"
+      }
+    ],
+    "require-jsdoc": "off",
+    "node/no-unsupported-features/es-syntax": "off",
+    "brace-style": [
+      "error",
+      "1tbs",
+      {
+        "allowSingleLine": true
+      }
+    ],
+    "quote-props": [
+      "error",
+      "as-needed",
+      {
+        "keywords": true
+      }
+    ],
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "complexity": [
+      "error",
+      10
+    ],
+    "valid-jsdoc": [
+      "off",
+      "always"
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
