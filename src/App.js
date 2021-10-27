@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage';
 import CartPage from './pages/CartPage';
 import SignupPage from './pages/SignupPage';
 import HomePage from './pages/HomePage';
+import PaymentPage from './pages/PaymentPage';
 import Footer from './components/Footer';
 
 import UserPage from './pages/UserPage';
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route path="/user">
             <UserPage />
+          </Route>
+          <Route path="/payment">
+            <PaymentPage />
           </Route>
           <Route path="/" exact>
             <HomePage />

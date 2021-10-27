@@ -25,15 +25,21 @@ import TotalAmount from '../functionals/total-amount';
 import JsonParser from '../functionals/json-parser';
 import AppConstants from '../constants/app-constants';
 import { toast } from 'react-toastify';
+import PaymentIntentModel from '../models/payment-intent-model';
+import PaymentIntentMethodModel from '../models/payment-intent-method-model';
+import BillAmount from '../functionals/bill-amount';
 
 const apiHandler = new ApiHandlers();
 
 function CartPage() {
   const history = useHistory();
-  const authToken = JsonParser(localStorage.getItem(AppConstants.APP_LOGGED_IN_USER));
   const { cart } = useContext(AppContext);
 
   const [userDetail, setUserDetail] = useState({});
+  const [processingPayment, setProcessingPayment] = useState(false);
+
+  const authToken = JsonParser(localStorage.getItem(AppConstants.APP_LOGGED_IN_USER));
+  const token = authToken?.data?.token;
 
   useEffect(() => {
     if (!authToken?.data?.token) {
@@ -69,7 +75,35 @@ function CartPage() {
     return cart.items?.length && TotalAmount(cart.items);
   };
 
-  const payHandler = () => {};
+  const payHandler = async () => {
+    setProcessingPayment(true);
+    const paymentIntent = PaymentIntentModel({ cart, userDetail }).toJSON();
+    console.info('paymentIntent', paymentIntent);
+    apiHandler.paymentApiHandler
+      .createPaymentIntent({ paymentIntent, token })
+      .then(resp => {
+        console.info(`PI created ${resp.data.paymentIntentId}`);
+        const requestedAmount = BillAmount(paymentIntent.data.bill);
+        return apiHandler.paymentApiHandler.createPaymentIntentMethod({
+          paymentIntentId: resp.data.paymentIntentId,
+          paymentIntentMethod: PaymentIntentMethodModel({ requestedAmount }),
+          token
+        });
+      })
+      .then(resp => {
+        console.info(`PIM created ${resp.data.paymentIntentMethodId}`);
+        return apiHandler.paymentApiHandler.commitPaymentIntent({
+          paymentIntentId: resp.data.paymentIntentId,
+          token
+        });
+      })
+      .then(resp => {
+        console.info(`PI committed ${resp.data.paymentIntentId}`);
+        setProcessingPayment(false);
+        history.push(`/payment?pi=${resp.data.paymentIntentId}`);
+      })
+      .catch(e => console.info(e));
+  };
 
   return (
     <MDBContainer className="mt-5">
@@ -128,7 +162,7 @@ function CartPage() {
             <MDBCardFooter>
               <div className="d-grid gap-2 col-12 mx-auto">
                 <MDBBtn
-                  disabled={!cart.items.length || total() < 300}
+                  disabled={processingPayment || !cart.items.length || total() < 300}
                   className="btn btn-success"
                   size="lg"
                   onClick={payHandler}
